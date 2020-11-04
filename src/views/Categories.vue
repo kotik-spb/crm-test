@@ -39,7 +39,6 @@ export default {
   },
   async mounted() {
     this.categories = await this.$store.dispatch("fetchCategories");
-    console.log(this.categories);
 
     this.loading = false;
   },
@@ -50,7 +49,6 @@ export default {
   methods: {
     addNewCategory(category) {
       this.categories.push(category);
-      console.log(this.categories);
     },
     updateCategories(category) {
       const idx = this.categories.findIndex(c => c.id === category.id);
