@@ -86,7 +86,7 @@
 
       <p class="center">
         Уже есть аккаунт?
-        <router-view to="/login">Войти!</router-view>
+        <router-link to="/login">Войти!</router-link>
       </p>
     </div>
   </form>
@@ -96,6 +96,11 @@
 import { email, required, minLength } from "vuelidate/lib/validators";
 export default {
   name: "Register",
+  metaInfo() {
+    return {
+      title: this.$title("Register")
+    };
+  },
   data() {
     return {
       email: "",
@@ -106,24 +111,25 @@ export default {
   },
   validations: {
     email: { email, required },
-    password: { required, minLength: minLength(8) },
+    password: { required, minLength: minLength(6) },
     name: { required },
     agree: { checked: v => v }
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
-
       const formData = {
         email: this.email,
         password: this.password,
         name: this.name
       };
-
-      this.$router.push("/");
+      try {
+        await this.$store.dispatch("register", formData);
+        this.$router.push("/");
+      } catch (e) {}
     }
   }
 };

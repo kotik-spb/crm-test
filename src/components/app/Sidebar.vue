@@ -9,27 +9,26 @@
         active-class="active"
         :exact="link.exact"
       >
-        <a class="waves-effect waves-orange pointer">{{ link.title }}</a>
+        <a class="pointer waves-effect waves-orange">{{ link.title }}</a>
       </router-link>
     </li>
   </ul>
 </template>
 
 <script>
+import localizeFilter from "@/filters/localize.filter";
 export default {
   props: ["value"],
   data() {
     return {
       links: [
-        { title: "Счет", url: "/", exact: true },
-        { title: "История", url: "/history" },
-        { title: "Планирование", url: "/planning" },
-        { title: "Новая запись", url: "/record" },
-        { title: "Категории", url: "/categories" }
+        { title: localizeFilter("Menu_Bill"), url: "/", exact: true },
+        { title: localizeFilter("Menu_History"), url: "/history" },
+        { title: localizeFilter("Menu_Planning"), url: "/planning" },
+        { title: localizeFilter("Menu_NewRecord"), url: "/record" },
+        { title: localizeFilter("Menu_Categories"), url: "/categories" }
       ]
     };
   }
 };
 </script>
-
-<style></style>
