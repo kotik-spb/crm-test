@@ -27,15 +27,12 @@ export default {
         throw e;
       }
     },
-    async recalcBills({ commit, dispatch, getters }) {
+    async recalcBills({ dispatch }) {
       const records = await dispatch("fetchRecords");
-      console.log(records);
-
       if (records.length) {
         let bill = 0;
         records.forEach(rec => {
           rec.type == "income" ? (bill += rec.amount) : (bill -= rec.amount);
-          console.log(bill);
         });
 
         dispatch("updateInfo", { bill });

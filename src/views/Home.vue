@@ -36,7 +36,6 @@ export default {
   },
   async mounted() {
     this.currency = await this.$store.dispatch("fetchCurrency");
-    console.log(this.currency);
     this.currency.rates["EUR"] = 1;
     this.loading = false;
   },
